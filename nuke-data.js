@@ -63,6 +63,7 @@ function deleteAccount(accountId) {
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
     if (!data) return
+    dbRef.remove()
     document.getElementById('status').innerHTML = 'Nuked user & account data';
   });
 }
