@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>nuke sunbird firebase data</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script defer src="./nuke-data.js"></script>
+</head>
+
+<body>
+<h2>nuke your data on sunbird</h2>
+<p>since they send your data to many places, this doesn't delete everything. just removes the data they keep in Firebase.</p>
+<p>Don't forget to change your Apple ID password and end your session for Sunbird! Assume your data is compromised.</p>
+<div id="loginForm">
+    <label>Sunbird Account:</label>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login (& delete data)</button>
+</div>
+
+<div>
+    <h4>Status</h4>
+
+    <pre id="status">
+    </pre>
+</div>
+<hr/>
+<a href="https://github.com/batuhan/sunbird-poc">Fork this on GitHub</a>
+
+</body>
+</html>
