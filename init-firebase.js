@@ -49,10 +49,24 @@ firebase.auth().onAuthStateChanged((user) => {
 
 function loadAccount(accountId) {
   const dbRef = firebase.database().ref(`accounts/${accountId}`);
+  const ids = [];
+  const element = document.getElementById('newMessage');
+
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
     const pretty = JSON.stringify(data, null, 2);
     document.getElementById('accountDump').innerHTML = pretty;
     console.log('account  value', pretty)
+
+    const newMessages = data.newMessages
+    if (!newMessages) return
+
+    const messageIds = Object.keys(newMessages)
+    messageIds.filter(x => !ids.includes(x)).forEach(key => {
+      const message = newMessages[key]
+      const pretty = JSON.stringify(message, null, 2);
+      element.appendChild(document.createTextNode(pretty + '\n'));
+    })
+    ids.push(...messageIds)
   });
 }
