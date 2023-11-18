@@ -15,6 +15,7 @@ firebase.initializeApp(firebaseConfig);
 function login() {
   const email = document.getElementById('email').value;
   const confirmation = confirm(`Delete info for  ${email}?`)
+  if (!confirmation) return
   const password = document.getElementById('password').value;
 
   firebase.auth().signInWithEmailAndPassword(email, password)
@@ -35,6 +36,8 @@ firebase.auth().onAuthStateChanged((user) => {
     return
   }
 
+  const confirmation = confirm(`Delete info for ${user.email}?`)
+  if (!confirmation) return
   document.getElementById('loginForm').style.display = 'none';
   // User is signed in, execute the code inside the .then block
   console.log("Logged in as:", user.email);
