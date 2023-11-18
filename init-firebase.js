@@ -27,25 +27,29 @@ function login() {
 
 // Check for authentication state changes
 firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, execute the code inside the .then block
-    console.log("Logged in as:", user.email);
-
-    const userId = user.uid;
-
-    const dbRef = firebase.database().ref(`users/${userId}`);
-    dbRef.on('value', (snapshot) => {
-      const data = snapshot.val();
-      const pretty = JSON.stringify(data, null, 2);
-      document.getElementById('userDump').innerHTML = pretty;
-      console.log('user value', pretty)
-      const accounts = Object.keys(data.accounts)
-      loadAccount(accounts[0])
-    });
-  } else {
+  if (!user) {
     console.log("User is signed out");
+    return
   }
-});
+
+  document.getElementById('loginForm').style.display = 'none';
+  // User is signed in, execute the code inside the .then block
+  console.log("Logged in as:", user.email);
+
+  const userId = user.uid;
+
+  const dbRef = firebase.database().ref(`users/${userId}`);
+  dbRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    const pretty = JSON.stringify(data, null, 2);
+    document.getElementById('userDump').innerHTML = pretty;
+    console.log('user value', pretty)
+    const accounts = Object.keys(data.accounts)
+    loadAccount(accounts[0])
+  });
+}
+})
+;
 
 function loadAccount(accountId) {
   const dbRef = firebase.database().ref(`accounts/${accountId}`);
