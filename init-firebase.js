@@ -65,7 +65,7 @@ function loadAccount(accountId) {
     messageIds.filter(x => !ids.includes(x)).forEach(key => {
       const message = newMessages[key]
       const pretty = JSON.stringify(message, null, 2);
-      element.appendChild(document.createTextNode(pretty + '\n'));
+      element.appendChild(document.createTextNode(key + " " + pretty + '\n'));
     })
     ids.push(...messageIds)
   });
