@@ -47,9 +47,7 @@ firebase.auth().onAuthStateChanged((user) => {
     const accounts = Object.keys(data.accounts)
     loadAccount(accounts[0])
   });
-}
 })
-;
 
 function loadAccount(accountId) {
   const dbRef = firebase.database().ref(`accounts/${accountId}`);
