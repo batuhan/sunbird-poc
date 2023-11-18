@@ -33,28 +33,26 @@ firebase.auth().onAuthStateChanged((user) => {
 
     const userId = user.uid;
 
-    // Subscribe to `settings/updates`
     const dbRef = firebase.database().ref(`users/${userId}`);
     dbRef.on('value', (snapshot) => {
       const data = snapshot.val();
       const pretty = JSON.stringify(data, null, 2);
       document.getElementById('userDump').innerHTML = pretty;
+      console.log('user value', pretty)
       const accounts = Object.keys(data.accounts)
       loadAccount(accounts[0])
     });
   } else {
-    // User is signed out or session has ended
     console.log("User is signed out");
-    // Perform any actions you need when the session ends
   }
 });
 
 function loadAccount(accountId) {
-  // Subscribe to `settings/updates`
   const dbRef = firebase.database().ref(`accounts/${accountId}`);
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
     const pretty = JSON.stringify(data, null, 2);
     document.getElementById('accountDump').innerHTML = pretty;
+    console.log('account  value', pretty)
   });
 }
