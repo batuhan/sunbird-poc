@@ -12,4 +12,4 @@ We've compiled our findings in [this blog post](https://texts.blog/2023/11/18/su
 
 ## License
 
-You can do whatever you want with it. It was mostly written by ChatGPT.
+Licensed with the [WTFPL](LICENSE.md). Do whatever with it. It was mostly written by ChatGPT.
